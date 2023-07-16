@@ -19,6 +19,10 @@ export default class VoteAliasCommand extends Command {
       return msg.reply("There is no motion active.")
     }
 
+    if (msg.command === null || msg.member === null) {
+      return msg.reply("You must provide a vote.")
+    }
+
     if (
       !args.reason &&
       this.council.getConfig(reasonRequiredMap[msg.command.name])
@@ -58,6 +62,10 @@ export default class VoteAliasCommand extends Command {
   }
 
   private getVoteName(msg: CommandoMessage) {
+    if (msg.command === null) {
+      return "Abstain"
+    }
+
     let name = msg.command.name
 
     if (msg.cleanContent.substring(0, 1) === Votum.bot.commandPrefix) {

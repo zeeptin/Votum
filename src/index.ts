@@ -3,7 +3,9 @@
 import Discord from "discord.js"
 import path from "path"
 
-require("dotenv").config()
+require("dotenv").config({
+  path: "./.env",
+})
 
 const shardingManager = new Discord.ShardingManager(
   path.join(__dirname, "Votum.js"),
@@ -12,7 +14,7 @@ const shardingManager = new Discord.ShardingManager(
   }
 )
 
-shardingManager.on("shardCreate", shard => {
+shardingManager.on("shardCreate", (shard) => {
   console.log(`Launching shard ${shard.id + 1}/${shardingManager.totalShards}`)
 })
 

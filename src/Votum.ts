@@ -74,7 +74,7 @@ class Votum {
   }
 
   private setActivity(): void {
-    this.bot.user?.setActivity("http://eryn.io/Votum")
+    this.bot.user?.setActivity("Gaminglight.com")
   }
 
   private registerCommands(): void {

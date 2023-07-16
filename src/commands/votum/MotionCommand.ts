@@ -39,6 +39,10 @@ export default class MotionCommand extends Command {
       }
     }
 
+    if (msg.member === null) {
+      return msg.reply("You must provide a motion.")
+    }
+
     if (this.council.currentMotion) {
       if (args.text === "kill") {
         if (

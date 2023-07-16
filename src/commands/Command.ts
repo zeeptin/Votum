@@ -51,6 +51,10 @@ export default class Command extends Commando.Command {
       return true
     }
 
+    if (msg.member === null) {
+      return false
+    }
+
     const isAdmin =
       msg.member.hasPermission("MANAGE_GUILD") ||
       !!msg.member.roles.cache.find((role) => role.name === "Votum Admin")
@@ -62,11 +66,14 @@ export default class Command extends Commando.Command {
     } else if (
       council &&
       this.customInfo.allowWithConfigurableRoles &&
-      this.customInfo.allowWithConfigurableRoles.find(
-        (configName) =>
-          council.getConfig(configName) &&
+      this.customInfo.allowWithConfigurableRoles.find((configName) => {
+        if (msg.member === null) {
+          return false
+        }
+
+        council.getConfig(configName) &&
           msg.member.roles.cache.has(council.getConfig(configName) as string)
-      )
+      })
     ) {
       return true
     } else if (council.councilorRole != null) {
